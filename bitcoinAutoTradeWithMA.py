@@ -2,8 +2,8 @@ import time
 import pyupbit
 import datetime
 
-access = "your-access"
-secret = "your-secret"
+access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
+secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
@@ -17,7 +17,7 @@ def get_start_time(ticker):
     start_time = df.index[0]
     return start_time
 
-def get_ma15(ticker):
+def get_ma15(ticker): # MA버전 추가분
     """15일 이동 평균선 조회"""
     df = pyupbit.get_ohlcv(ticker, interval="day", count=15)
     ma15 = df['close'].rolling(15).mean().iloc[-1]
@@ -46,21 +46,27 @@ print("autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-BTC")
+        start_time = get_start_time("KRW-NEAR")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-BTC", 0.5)
-            ma15 = get_ma15("KRW-BTC")
-            current_price = get_current_price("KRW-BTC")
-            if target_price < current_price and ma15 < current_price:
+            target_price = get_target_price("KRW-NEAR", 0.5)
+            ma15 = get_ma15("KRW-NEAR") # MA버전 삽입분
+            current_price = get_current_price("KRW-NEAR")
+            benefit_price = target_price * 1.15 # 익절조건은 매수 후 15%상승시
+            if target_price < current_price and ma15 < current_price and current_price < benefit_price: # MA버전 삽입분
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-BTC", krw*0.9995)
+                    upbit.buy_market_order("KRW-NEAR", krw*0.9995)
+            elif target_price < current_price and benefit_price < current_price: # 익절코드
+                near = get_balance("NEAR")
+                if near > 0.00008:
+                    upbit.sell_market_order("KRW-NEAR", near*0.9995)
+                    break
         else:
-            btc = get_balance("BTC")
-            if btc > 0.00008:
-                upbit.sell_market_order("KRW-BTC", btc*0.9995)
+            near = get_balance("NEAR")
+            if near > 0.00008:
+                upbit.sell_market_order("KRW-NEAR", near*0.9995)
         time.sleep(1)
     except Exception as e:
         print(e)
