@@ -4,11 +4,11 @@ import numpy as np
 # OHLCV(open, high, low, close, volume)로 당일 시가, 고가, 저가, 종가, 거래량에 대한 데이터
 df = pyupbit.get_ohlcv("KRW-BTC", count=60)
 
-# 이동평균선 5일기준 추가(window=고려일수)
+# 이동평균선 15일기준 추가(window=고려일수)
 df['ma5'] = df['close'].rolling(window=15).mean().shift(1) # MA버전 삽입분
 
 # 변동폭 * k 계산, (고가 - 저가) * k값
-df['range'] = (df['high'] - df['low']) * 0.9
+df['range'] = (df['high'] - df['low']) * 0.5
 
 # target(매수가), range 컬럼을 한칸씩 밑으로 내림(.shift(1))
 df['target'] = df['open'] + df['range'].shift(1)
@@ -35,4 +35,4 @@ print("MDD(%): ", df['dd'].max())
 print("HPR: ", df['hpr'][-2]) # MA버전 삽입분
 
 #엑셀로 출력
-df.to_excel("220121back_BTC_K.xlsx")
+df.to_excel("220121back_BTC_1.xlsx")

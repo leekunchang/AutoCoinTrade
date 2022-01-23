@@ -44,9 +44,9 @@ while True:
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-NEAR", 0.4)
+            target_price = get_target_price("KRW-NEAR", 0.1)
             current_price = get_current_price("KRW-NEAR")
-            benefit_price = target_price * 1.2 # 익절조건은 타겟의 1.2배
+            benefit_price = target_price * 1.04 # 익절조건은 타겟의 1.04배
             if target_price < current_price and current_price < benefit_price: # 타겟금액 이상이되고 익절조건 미만일때 매수만
                 krw = get_balance("KRW") # 이하 동일
                 if krw > 5000:
