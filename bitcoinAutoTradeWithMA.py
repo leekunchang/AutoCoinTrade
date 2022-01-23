@@ -54,7 +54,7 @@ while True:
             ma15 = get_ma15("KRW-NEAR") # MA버전 삽입분
             current_price = get_current_price("KRW-NEAR")
             benefit_price = target_price * 1.15 # 익절조건은 매수 후 15%상승시
-            if target_price < current_price and ma15 < current_price: # MA버전 삽입분
+            if target_price < current_price and ma15 < current_price and current_price < benefit_price: # MA버전 삽입분
                 krw = get_balance("KRW")
                 if krw > 5000:
                     upbit.buy_market_order("KRW-NEAR", krw*0.9995)
