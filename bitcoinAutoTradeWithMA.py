@@ -50,7 +50,7 @@ while True:
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-NEAR", 0.1) # K상수값 0.1
+            target_price = get_target_price("KRW-NEAR", 0.3) # K상수값 0.3
             ma15 = get_ma15("KRW-NEAR") # MA버전 삽입분
             current_price = get_current_price("KRW-NEAR")
             benefit_price = target_price * 1.15 # 익절조건은 매수 후 15%상승시

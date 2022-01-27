@@ -8,7 +8,7 @@ df = pyupbit.get_ohlcv("KRW-NEAR",count=200)
 df['ma5'] = df['close'].rolling(window=3).mean().shift(1)
 
 # 변동폭 * k 계산, (고가 - 저가) * k값
-df['range'] = (df['high'] - df['low']) * 0.1
+df['range'] = (df['high'] - df['low']) * 0.3
 
 # target(매수가), range 컬럼을 한칸씩 밑으로 내림(.shift(1))
 df['target'] = df['open'] + df['range'].shift(1)
@@ -35,4 +35,4 @@ print("MDD: ", df['dd'].max())
 print("HPR: ", df['hpr'][-2])
 
 #엑셀로 출력
-df.to_excel("maback_1_15.xlsx")
+df.to_excel("maback_1_18.xlsx")

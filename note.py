@@ -42,7 +42,7 @@
     
 # 변수 깔끔하게 버전
 target_price = 200 # 1차 매수 희망값
-current_price = 100 # 현재가
+current_price = 241 # 현재가
 benefit_price = target_price * 1.2 # 익절 희망가, 상수부분 희망 익절배율로
 ma15 = 230
 # 현재가격이 100이면 안사 - 타겟 이하
