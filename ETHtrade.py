@@ -6,9 +6,9 @@ access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
 K_code = 0.3 # K 상수값
-coin_buy = "KRW-SAND"
-coin_code = "SAND"
-coin_volume = "sand"
+coin_buy = "KRW-ETH"
+coin_code = "ETH"
+coin_volume = "eth"
 
 
 
