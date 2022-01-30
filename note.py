@@ -51,12 +51,12 @@ ma15 = 230
 # 현재가격이 250이면 익절 - 익절조건 충족
 
 
-if target_price < current_price and ma15 < current_price and current_price < benefit_price:
-    print("매수")
-elif target_price < current_price and benefit_price < current_price: 
-    print("익절")
-else:
-    print("안사")
+# if target_price < current_price and ma15 < current_price and current_price < benefit_price:
+#     print("매수")
+# elif target_price < current_price and benefit_price < current_price: 
+#     print("익절")
+# else:
+#     print("안사")
 
 
 
@@ -65,3 +65,13 @@ else:
 # close = df['close']
 # ma5 = close.rolling(5).mean()
 # print(ma5)
+
+
+
+K_code = 0.3 # K 상수값
+coin_buy = ""KRW-SAND""
+coin_code = "SAND"
+coin_volume = "sand"
+
+
+print(coin_buy)
