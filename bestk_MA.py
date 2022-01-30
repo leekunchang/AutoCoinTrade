@@ -3,7 +3,7 @@ import numpy as np
 
 
 def get_ror(k=0.5):
-    df = pyupbit.get_ohlcv("KRW-ETH", count=90)
+    df = pyupbit.get_ohlcv("KRW-SAND", count=90)
     df['range'] = (df['high'] - df['low']) * k
     df['target'] = df['open'] + df['range'].shift(1)
     # 이동평균선 3일기준 추가(window=고려일수)

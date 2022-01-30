@@ -47,7 +47,7 @@ def get_current_price(ticker):
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
 
-# 자동매매 시작s
+# 자동매매 시작
 while True:
     try:
         now = datetime.datetime.now()

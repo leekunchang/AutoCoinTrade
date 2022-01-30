@@ -5,7 +5,7 @@ import datetime
 access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
-K_code = 0.3 # K 상수값
+K_code = 0.5 # K 상수값
 coin_buy = "KRW-SAND"
 coin_code = "SAND"
 coin_volume = "sand"
@@ -50,7 +50,7 @@ def get_current_price(ticker):
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
 
-# 자동매매 시작s
+# 자동매매 시작
 while True:
     try:
         now = datetime.datetime.now()

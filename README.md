@@ -1,3 +1,12 @@
+## 조코딩 강의 코드 수정부분
+ - backtestMA.py : 이평선과 수수료 부분 추가
+ - bestk_MA.py : 이평선 수수료 부분 추가
+ - bitcoinAutoTradeWithMA.py : 이평선 3일 수정, K 값 변경을 용이하게 상단에 K_code로 변수값지정
+ - ETHtrade.py : 종목변경을 용이하게 하기위해 변수값으로 지정(ETH 이더리움)
+ - FLOWtrade.py : 종목변경을 용이하게 하기위해 변수값으로 지정(FLOW 플로우)
+ - SANDtrade.py : 종목변경을 용이하게 하기위해 변수값으로 지정(FLOW 샌드박스)
+
+----- 이하 조코딩 깃헙 출처 동일
 ## 출처 by 유튜브 조코딩 채널
 ### pyupbit 라이브러리를 활용하여 upbit 거래소에서 비트코인 자동매매를 하는 코드입니다.
 
@@ -5,7 +14,7 @@
 - test.py : 잔고 조회 (1강)
 - backtest.py : 백테스팅 코드 (2강)
 - bestK.py : 가장 좋은 k 값을 찾는 코드 (2강)
-- bitcoinAutoTrade.py : 변동성 돌파 전략 비트코인 자동매매 코드 - 매수 후 15% 상승시 익절 후 브레이크 코드 추가, 니어프로토콜 적용
+- bitcoinAutoTrade.py : 변동성 돌파 전략 비트코인 자동매매 코드
 - bitcoinAutoTradeWithAI.py : 변동성 돌파 전략 + 인공지능(Prophet) 비트코인 자동매매 코드 (3강)
 - bitcoinAutoTradeWithMA.py : 변동성 돌파 전략 + 15일 이동평균선 이상 비트코인 자동매매 코드 (2강)
 - bitcoinAutoTradeWithSlack.py : 위 코드에 슬랙 붙여 놓은 것 (2강)

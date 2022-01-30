@@ -5,7 +5,11 @@ import datetime
 access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
-K_code = 0.3 # K 상수값
+K_code = 0.5 # K 상수값
+coin_buy = "KRW-FLOW"
+coin_code = "FLOW"
+coin_volume = "flow"
+
 
 
 
@@ -46,31 +50,31 @@ def get_current_price(ticker):
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
 
-# 자동매매 시작s
+# 자동매매 시작
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-FLOW")
+        start_time = get_start_time(coin_buy)
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-FLOW", K_code) # K상수값 K_code
-            ma15 = get_ma15("KRW-FLOW") # MA버전 삽입분
-            current_price = get_current_price("KRW-FLOW")
+            target_price = get_target_price(coin_buy, K_code) # K상수값 K_code
+            ma15 = get_ma15(coin_buy) # MA버전 삽입분
+            current_price = get_current_price(coin_buy)
             benefit_price = target_price * 1.15 # 익절조건은 매수 후 15%상승시
             if target_price < current_price and ma15 < current_price and current_price < benefit_price: # MA버전 삽입분
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-FLOW", krw*0.9995)
+                    upbit.buy_market_order(coin_buy, krw*0.9995)
             elif target_price < current_price and benefit_price < current_price: # 익절코드
-                flow = get_balance("FLOW")
-                if flow > 0.00008:
-                    upbit.sell_market_order("KRW-FLOW", flow*0.9995)
+                coin_volume = get_balance(coin_code)
+                if coin_volume > 0.00008:
+                    upbit.sell_market_order(coin_buy, coin_volume*0.9995)
                     break
         else:
-            flow = get_balance("FLOW")
-            if flow > 0.00008:
-                upbit.sell_market_order("KRW-FLOW", flow*0.9995)
+            coin_volume = get_balance(coin_code)
+            if coin_volume > 0.00008:
+                upbit.sell_market_order(coin_buy, coin_volume*0.9995)
         time.sleep(1)
     except Exception as e:
         print(e)
