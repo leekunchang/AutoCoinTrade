@@ -5,6 +5,11 @@ import datetime
 access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
+K_code = 0.3 # K 상수값
+# coin_code = "KRW-SAND"
+
+
+
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
     df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
@@ -42,31 +47,31 @@ def get_current_price(ticker):
 upbit = pyupbit.Upbit(access, secret)
 print("autotrade start")
 
-# 자동매매 시작
+# 자동매매 시작s
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-NEAR")
+        start_time = get_start_time("KRW-SNAD")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-NEAR", 0.3) # K상수값 0.3
-            ma15 = get_ma15("KRW-NEAR") # MA버전 삽입분
-            current_price = get_current_price("KRW-NEAR")
+            target_price = get_target_price("KRW-SAND", K_code) # K상수값 K_code
+            ma15 = get_ma15("KRW-SAND") # MA버전 삽입분
+            current_price = get_current_price("KRW-SAND")
             benefit_price = target_price * 1.15 # 익절조건은 매수 후 15%상승시
             if target_price < current_price and ma15 < current_price and current_price < benefit_price: # MA버전 삽입분
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order("KRW-NEAR", krw*0.9995)
+                    upbit.buy_market_order("KRW-SAND", krw*0.9995)
             elif target_price < current_price and benefit_price < current_price: # 익절코드
-                near = get_balance("NEAR")
-                if near > 0.00008:
-                    upbit.sell_market_order("KRW-NEAR", near*0.9995)
+                sand = get_balance("SAND")
+                if sand > 0.00008:
+                    upbit.sell_market_order("KRW-SAND", sand*0.9995)
                     break
         else:
-            near = get_balance("NEAR")
-            if near > 0.00008:
-                upbit.sell_market_order("KRW-NEAR", near*0.9995)
+            sand = get_balance("SAND")
+            if sand > 0.00008:
+                upbit.sell_market_order("KRW-SAND", sand*0.9995)
         time.sleep(1)
     except Exception as e:
         print(e)
