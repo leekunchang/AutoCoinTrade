@@ -35,4 +35,4 @@ print("MDD: ", df['dd'].max())
 print("HPR: ", df['hpr'][-2])
 
 #엑셀로 출력
-df.to_excel("BTC_200_5.xlsx")
+df.to_excel("123123123.xlsx")
