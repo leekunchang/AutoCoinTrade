@@ -6,9 +6,9 @@ access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
 K_code = 0.5 # K 상수값
-coin_buy = "KRW-MANA"
-coin_code = "MANA"
-coin_volume = "mana"
+coin_buy = "KRW-SOL"
+coin_code = "SOL"
+coin_volume = "sol"
 
 
 

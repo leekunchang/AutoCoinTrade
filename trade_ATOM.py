@@ -6,9 +6,9 @@ access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
 K_code = 0.5 # K 상수값
-coin_buy = "KRW-GAS"
-coin_code = "GAS"
-coin_volume = "gas"
+coin_buy = "KRW-ATOM"
+coin_code = "ATOM"
+coin_volume = "atom"
 
 
 
