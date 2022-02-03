@@ -6,9 +6,8 @@ access = "K1izlIYmgptIBMaMhfaZlWh8KlFnUXOxIXmS91pA"
 secret = "x4vnFWp8mViKuunhEZwkAaojIomtTNnzVx6xMIDi"
 
 K_code = 0.5 # K 상수값
-coin_buy = "KRW-SAND"
-coin_code = "SAND"
-coin_volume = "sand"
+B_code = 1.0205 # 익절 희망 % - 수수료포함 2프로 먹고 타겟보다 1% 높을때 매수. (최소마진 1%)
+coin_code = "GAS"
 
 
 
@@ -25,11 +24,11 @@ def get_start_time(ticker):
     start_time = df.index[0]
     return start_time
 
-def get_ma15(ticker): # MA버전 추가분
+def get_ma3(ticker): # MA버전 추가분
     """3일 이동 평균선 조회"""
     df = pyupbit.get_ohlcv(ticker, interval="day", count=3)
-    ma15 = df['close'].rolling(3).mean().iloc[-1]
-    return ma15
+    ma3 = df['close'].rolling(3).mean().iloc[-1]
+    return ma3
 
 def get_balance(ticker):
     """잔고 조회"""
@@ -54,27 +53,29 @@ print("autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time(coin_buy)
+        start_time = get_start_time("KRW-"+coin_code)
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price(coin_buy, K_code) # K상수값 K_code
-            ma15 = get_ma15(coin_buy) # MA버전 삽입분
-            current_price = get_current_price(coin_buy)
-            benefit_price = target_price * 1.15 # 익절조건은 매수 후 15%상승시
-            if target_price < current_price and ma15 < current_price and current_price < benefit_price: # MA버전 삽입분
+            target_price = get_target_price("KRW-"+coin_code, K_code) # K상수값 K_code
+            ma3 = get_ma3("KRW-"+coin_code) # MA버전 삽입분
+            current_price = get_current_price("KRW-"+coin_code)
+            benefit_price = target_price * B_code # 익절조건은 매수 후 15%상승시
+            # 매수조건 - 목표가 and 이평선 < 현재가격 < 타겟가격 * 1.01 < 익절값
+            # 실제 매수조건은 목표+이평선 도달 시 매수, 그리고 매수가보다 1% 높으면 안사짐. 조건에 합할 경우 수차례 사짐
+            if target_price < current_price and ma3 < current_price and current_price < benefit_price and current_price < target_price * 1.01:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    upbit.buy_market_order(coin_buy, krw*0.9995)
-            elif target_price < current_price and benefit_price < current_price: # 익절코드
+                    upbit.buy_market_order("KRW-"+coin_code, krw*0.9995)
+            elif target_price < current_price and benefit_price < current_price: # 익절코드 or 손절코드
                 coin_volume = get_balance(coin_code)
                 if coin_volume > 0.00008:
-                    upbit.sell_market_order(coin_buy, coin_volume*0.9995)
-                    break
+                    upbit.sell_market_order("KRW-"+coin_code, coin_volume*0.9995)
+                    
         else:
             coin_volume = get_balance(coin_code)
             if coin_volume > 0.00008:
-                upbit.sell_market_order(coin_buy, coin_volume*0.9995)
+                upbit.sell_market_order("KRW-"+coin_code, coin_volume*0.9995)
         time.sleep(1)
     except Exception as e:
         print(e)

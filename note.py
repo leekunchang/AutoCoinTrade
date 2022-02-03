@@ -1,88 +1,29 @@
-# # # k = 300
-# # # x = 150
+# if target_price < current_price and ma3 < current_price and current_price < benefit_price and current_price < target_price * 1.01:
+#                 krw = get_balance("KRW")
+#                 if krw > 5000:
+#                     upbit.buy_market_order("KRW-"+coin_code, krw*0.9995)
+#             elif target_price < current_price and benefit_price < current_price:
 
 
-# # # if k > 100:
-# # #     if x > 200:
-# # #         print("1단계 조건충족")
-# # # if k * 2 > 100:
-# # #     if x > 50:
-# # #         print("2단계 조건충족")
+# crunt_price_list = [980, 1001, 1009, 1023]
+# c1 = [for i in crun
+# t_price_list]
+# print(c1)
 
-# # #     if target_price < current_price and target_price * 1.2 < current_price:
-# # #         krw = get_balance("KRW")
-# # #         if krw > 5000:
-# # #             upbit.buy_market_order("KRW-BTC", krw * 0.9995)
-# # #     elif target_price < current_price and target_price * 1.2 > current_price: 
-# # #         btc = get_balance("BTC")
-# # #         if btc > 0.00008: 
-# # #             upbit.sell_market_order("KRW-BTC", btc * 0.9995)
-# # #     else:
-# # #         print("Do nothing")
-# # # else:
-# # #     btc = get_balance("BTC")
-# # #     if btc > 0.0008:
-# # #         upbit.sell_market_order("KRW-BTC", btc * 0.9995)
-        
-# # # time.sleep(1);
+c1 = 1099
+t1 = 1000000
+ma3 = 980000
+b1 = t1 * 1.0205
 
+print("현재가", c1)
+print("매수가", t1)
+print("재매수가", t1* 1.01)
+print("익절값", b1)
+print("손절값", t1 * 0.998)
 
-# # # 1번 현재가 100 = 거래 안되어야함
-# # # 2번 현재가 201 = 매수 되어야함
-# # # 3번 현재가 250 = 익절 되어야함
-
-# # # current1 = 250
-# # # target1 = 200
-# # # if target1 < current1 and target1 * 1.2 > current1:
-# # #     print("매수")
-# # # elif target1 < current1 and target1 * 1.2 < current1:
-# # #     print("익절")
-# # # else:
-# # #     print("안사")
-    
-# # 변수 깔끔하게 버전
-# target_price = 200 # 1차 매수 희망값
-# current_price = 241 # 현재가
-# benefit_price = target_price * 1.2 # 익절 희망가, 상수부분 희망 익절배율로
-# ma15 = 230
-# # 현재가격이 100이면 안사 - 타겟 이하
-# # 현재가격이 201이면 안사 - 타겟 이상, 이평선 충족미만
-# # 현재가격이 231이면 매수 - 타겟 이상, 이평선 충족
-# # 현재가격이 250이면 익절 - 익절조건 충족
-
-
-# # if target_price < current_price and ma15 < current_price and current_price < benefit_price:
-# #     print("매수")
-# # elif target_price < current_price and benefit_price < current_price: 
-# #     print("익절")
-# # else:
-# #     print("안사")
-
-
-
-# # import pyupbit
-# # df = pyupbit.get_ohlcv("NEAR")
-# # close = df['close']
-# # ma5 = close.rolling(5).mean()
-# # print(ma5)
-
-
-
-K_code = 0.3 # K 상수값
-coin_buy = "SAND"
-
-print("KRW-"+coin_buy)
-print("0."+(K_code))
-
-
-
-# for k in range(sand, ETH, ):
-#     ror = get_ror(k)
-#     print("%.1f %f" % (k, ror))
-
-# import pyupbit
-# import numpy as np
-
-# # OHLCV(open, high, low, close, volume)로 당일 시가, 고가, 저가, 종가, 거래량에 대한 데이터
-# df = pyupbit.get_ohlcv("KRW-MANA", "minute1")
-# df.to_excel("BTC_200_5.xlsx")
+if t1 < c1 and ma3 < c1 and c1 < b1 and c1 < t1 * 1.01:
+    print("매수")
+elif t1 * 0.998 > c1 or t1 < c1 and b1 < c1:
+    print("매도")
+else:
+    print("안사")
